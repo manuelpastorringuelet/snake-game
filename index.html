@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake Game</title>
+  </head>
+  <body class="bg-green-300 flex gap-2 flex-col justify-center items-center">
+    <header>
+      <h1 class="mt-10 text-4xl">Snake Game</h1>
+    </header>
+
+    <main>
+      <div
+        id="grid-container"
+        class="bg-rose-100 w-[400px] h-[400px] grid grid-cols-21 grid-rows-21 border-2 border-neutral-900 shadow-slate-700"
+      ></div>
+    </main>
+
+    <footer class="flex gap-8 text-2xl items-center">
+      <p>counter</p>
+      <button class="py-1 px-5 rounded-full bg-rose-400 text-white">
+        new game
+      </button>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
