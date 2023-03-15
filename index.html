@@ -6,22 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snake Game</title>
   </head>
-  <body class="bg-green-300 flex gap-2 flex-col justify-center items-center">
+  <body
+    class="flex gap-2 flex-col justify-center items-center bg-hero bg-cover bg-blend-overlay"
+  >
     <header>
-      <h1 class="mt-10 text-4xl">Snake Game</h1>
+      <h1 class="mt-10 text-5xl">Snake Game</h1>
     </header>
 
     <main>
       <div
-        id="grid-container"
-        class="bg-rose-100 w-[400px] h-[400px] grid grid-cols-21 grid-rows-21 border-2 border-neutral-900 shadow-slate-700"
+        id="snake-grid"
+        class="bg-green-500 border-2 border-neutral-900 shadow-slate-700 w-[400px] h-[400px] bg-opacity-90"
       ></div>
     </main>
 
     <footer class="flex gap-8 text-2xl items-center">
       <p>counter</p>
-      <button class="py-1 px-5 rounded-full bg-rose-400 text-white">
-        new game
+      <button id="start" class="py-1 w-32 rounded-full bg-rose-400 text-white">
+        start game
       </button>
     </footer>
 

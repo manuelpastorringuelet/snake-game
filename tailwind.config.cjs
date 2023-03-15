@@ -12,6 +12,9 @@ module.exports = {
       fontFamily: {
         snake: ["Odibee Sans", "sans-serif"],
       },
+      backgroundImage: {
+        "hero": "url('./src/images/background-snake-game.png')"
+      }
       
     },
   },
