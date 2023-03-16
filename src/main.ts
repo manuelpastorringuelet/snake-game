@@ -6,41 +6,13 @@ import {
   INITIAL_SPEED,
   ROWS,
 } from "./gameConfig";
-import { createBoard } from "./board";
-import { Direction } from "./type";
-import { coordToId, idToCoord } from "./utils";
+import { boardControls, createBoard } from "./board";
+import { Direction } from "./types";
+import { drawSnake, updateSnake } from "./snake";
+import { getRandomApple, drawApple, updateApple } from "./apple";
 
 // grab new game button
-const startBtn = document.getElementById("start");
-
-function updateSnake(snake: Array<string>, snakeDirection: Direction) {
-  console.log(snake, snakeDirection);
-  // input ["11-11", "12-11", "13-11"]
-
-  // find the head of the snake
-  let snakeHead = snake[0];
-
-  // write idToCoord function [11, 13] (extract x and y the opposite of the coordToId function)
-
-  // update new verticalPosition of snakeHead
-  const snakeHeadVertPos = idToCoord(snakeHead)[0] + snakeDirection.v;
-
-  // update new horizontalPosition of snakeHead
-  const snakeHeadHorPos = idToCoord(snakeHead)[1] + snakeDirection.h;
-
-  // convert the new snake into string with coordToId function
-  snakeHead = coordToId([snakeHeadVertPos, snakeHeadHorPos]);
-
-  // create new snake array with updated head and remove tail
-  const newSnake = snake;
-  newSnake.unshift(snakeHead);
-  newSnake.pop(); // return updated snake array
-  console.log(newSnake); // output ['10-11', '11-11', '12-11']
-}
-
-function drawSnake() {
-  // console.log("I'm draw");
-}
+const startBtn = document.getElementById("start") as HTMLButtonElement;
 
 function init() {
   // setup
@@ -58,18 +30,39 @@ function init() {
   // if button is activate, change innerText to "new game"
   if (startBtn) {
     startBtn.textContent = "new game";
+    startBtn.disabled = true;
   }
+
+  // listen to event
+  document.addEventListener("keydown", (event) => {
+    boardControls(event, snakeDirection);
+  });
+
+  let apple = getRandomApple();
+
+  drawApple(apple);
 
   // setup game loop
   function gameLoop() {
     // update snake & update apple
-    updateSnake(snake, snakeDirection);
+    const updatedSnake = updateSnake(snake, snakeDirection);
+    snake = updatedSnake;
+
+    const updatedApple = updateApple(snake, apple);
+
+    // check if snake eat some apple
+    if (snake[0] === apple) {
+      snake.push(apple);
+    }
+
+    apple = updatedApple;
 
     //draw snake & draw apple
-    drawSnake();
+    drawSnake(snake);
+    drawApple(apple);
 
     setTimeout(() => {
-      // window.requestAnimationFrame(gameLoop);
+      window.requestAnimationFrame(gameLoop);
     }, speed);
   }
   window.requestAnimationFrame(gameLoop);

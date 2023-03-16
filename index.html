@@ -7,7 +7,7 @@
     <title>Snake Game</title>
   </head>
   <body
-    class="flex gap-2 flex-col justify-center items-center bg-hero bg-cover bg-blend-overlay"
+    class="bg-orange-300 flex gap-2 flex-col justify-center items-center bg-hero bg-cover bg-blend-dark-light"
   >
     <header>
       <h1 class="mt-10 text-5xl">Snake Game</h1>
@@ -16,13 +16,16 @@
     <main>
       <div
         id="snake-grid"
-        class="bg-green-500 border-2 border-neutral-900 shadow-slate-700 w-[400px] h-[400px] bg-opacity-90"
+        class="bg-zinc-100 border-2 border-neutral-900 shadow-slate-700 w-[400px] h-[400px] bg-opacity-80"
       ></div>
     </main>
 
     <footer class="flex gap-8 text-2xl items-center">
       <p>counter</p>
-      <button id="start" class="py-1 w-32 rounded-full bg-rose-400 text-white">
+      <button
+        id="start"
+        class="py-1 w-32 rounded-full bg-green-700 text-white focus:hidden"
+      >
         start game
       </button>
     </footer>

@@ -25,8 +25,16 @@
 }
 
 @layer base {
-    * {
-        @apply font-snake; 
-        @apply text-neutral-900
-    }
+  * {
+    @apply font-snake;
+    @apply text-neutral-900;
+  }
+}
+
+.snake-square {
+  @apply bg-green-500 border-2 border-green-800  rounded-md;
+}
+
+.apple-square {
+  @apply bg-red-500 border-2 border-red-800 rounded-md;
 }

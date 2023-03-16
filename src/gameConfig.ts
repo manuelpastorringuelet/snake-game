@@ -1,7 +1,7 @@
 // number of board cols and rows
 export const ROWS = 21;
 export const COLS = 21;
-export const INITIAL_SPEED = 1000; // speed in ms
+export const INITIAL_SPEED = 200; // speed in ms
 
 // 0 is not moving in that direction
 // +1 for rows is downwards, -1 is upwards
