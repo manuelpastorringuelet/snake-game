@@ -8,7 +8,7 @@ import {
 } from "./gameConfig";
 import { createBoard } from "./board";
 import { Direction } from "./type";
-import { idToCoord } from "./utils";
+import { coordToId, idToCoord } from "./utils";
 
 // grab new game button
 const startBtn = document.getElementById("start");
@@ -19,28 +19,27 @@ function updateSnake(snake: Array<string>, snakeDirection: Direction) {
 
   // find the head of the snake
   let snakeHead = snake[0];
-  console.log(snakeHead);
 
   // write idToCoord function [11, 13] (extract x and y the opposite of the coordToId function)
-  idToCoord(snakeHead);
-  console.log(snakeHead);
 
   // update new verticalPosition of snakeHead
-  // snakeHead = idToCoord(snakeHeadId);
+  const snakeHeadVertPos = idToCoord(snakeHead)[0] + snakeDirection.v;
 
   // update new horizontalPosition of snakeHead
+  const snakeHeadHorPos = idToCoord(snakeHead)[1] + snakeDirection.h;
 
-  // convert teh new snake into string with coordToId function
+  // convert the new snake into string with coordToId function
+  snakeHead = coordToId([snakeHeadVertPos, snakeHeadHorPos]);
 
   // create new snake array with updated head and remove tail
-
-  // return updated snake array
-
-  // output ['10-11', '11-11', '12-11']
+  const newSnake = snake;
+  newSnake.unshift(snakeHead);
+  newSnake.pop(); // return updated snake array
+  console.log(newSnake); // output ['10-11', '11-11', '12-11']
 }
 
 function drawSnake() {
-  console.log("I'm draw");
+  // console.log("I'm draw");
 }
 
 function init() {
@@ -70,7 +69,7 @@ function init() {
     drawSnake();
 
     setTimeout(() => {
-      window.requestAnimationFrame(gameLoop);
+      // window.requestAnimationFrame(gameLoop);
     }, speed);
   }
   window.requestAnimationFrame(gameLoop);

@@ -5,4 +5,3 @@ export type Direction = {
   h: -1 | -1 | 0;
 };
 
-export type Id = `${number}-${number}`;
