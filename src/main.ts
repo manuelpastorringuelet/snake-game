@@ -27,9 +27,9 @@ function init() {
   // create board
   createBoard(ROWS, COLS, snakeContainer);
 
-  // if button is activate, change innerText to "new game"
+  // if button is activate, change innerText to "reset game"
   if (startBtn) {
-    startBtn.textContent = "new game";
+    startBtn.textContent = "reset game";
     startBtn.disabled = true;
   }
 
@@ -45,15 +45,17 @@ function init() {
   // setup game loop
   function gameLoop() {
     // update snake & update apple
-    const updatedSnake = updateSnake(snake, snakeDirection);
+    let updatedSnake: string[] = [];
+    try {
+      updatedSnake = updateSnake(snake, snakeDirection, apple);
+    } catch (err) {
+      window.alert(err);
+      return;
+    }
+
     snake = updatedSnake;
 
     const updatedApple = updateApple(snake, apple);
-
-    // check if snake eat some apple
-    if (snake[0] === apple) {
-      snake.push(apple);
-    }
 
     apple = updatedApple;
 

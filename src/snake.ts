@@ -1,7 +1,11 @@
 import { Direction } from "./types";
 import { coordToId, idToCoord } from "./utils";
 
-export function updateSnake(snake: Array<string>, snakeDirection: Direction) {
+export function updateSnake(
+  snake: Array<string>,
+  snakeDirection: Direction,
+  apple: string
+) {
   // input ["11-11", "12-11", "13-11"]
 
   // find the head of the snake
@@ -18,11 +22,20 @@ export function updateSnake(snake: Array<string>, snakeDirection: Direction) {
   // convert the new snake into string with coordToId function
   const newSnakeHead = coordToId([snakeHeadV, snakeHeadH]);
 
+  // check if snakeHead is crossing the snake body
+  if (snake.includes(newSnakeHead)) {
+    throw new Error("GAME OVER!");
+  }
+
   // create new snake array with updated head and remove tail
-  const slicedSnake = snake.slice(0, snake.length - 1);
+  const slicedSnake =
+    // check if snake eat some apple
+    newSnakeHead !== apple ? snake.slice(0, snake.length - 1) : snake;
+
+  const newSnake = [newSnakeHead, ...slicedSnake];
 
   // return updated snake array
-  return [newSnakeHead, ...slicedSnake]; // output ['10-11', '11-11', '12-11']
+  return newSnake; // output ['10-11', '11-11', '12-11']
 }
 
 export function drawSnake(snake: Array<string>) {
