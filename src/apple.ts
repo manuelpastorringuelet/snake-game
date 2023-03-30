@@ -1,7 +1,11 @@
-import { ROWS, COLS } from "./gameConfig";
+import { ROWS, COLS, INITIAL_SPEED } from "./gameConfig";
 import { randomCoordinate, coordToId } from "./utils";
 
 const appleStyle = "apple-square";
+let counter = 0;
+const counterParagraph = document.getElementById(
+  "counter"
+) as HTMLParagraphElement;
 
 export function getRandomApple() {
   const [appleRow, appleColumn] = randomCoordinate(ROWS, COLS);
@@ -28,6 +32,8 @@ export function updateApple(snake: Array<string>, apple: string) {
     // remove the apple and generate a new one
     appleBlock.classList.remove(appleStyle);
     const newApple = getRandomApple();
+    counter++;
+    counterParagraph.innerText = `${counter}`;
     return newApple;
   }
   // return the apple
