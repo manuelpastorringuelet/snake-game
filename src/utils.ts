@@ -17,3 +17,7 @@ export function randomNumber(range: number) {
 export function randomCoordinate(xRange: number, yRange: number) {
   return [randomNumber(xRange), randomNumber(yRange)];
 }
+
+export function mod(n: number, m: number) {
+	return ((n % m) + m) % m;
+}

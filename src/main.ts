@@ -15,6 +15,7 @@ import { getRandomApple, drawApple, updateApple } from "./apple";
 const startBtn = document.getElementById("start") as HTMLButtonElement;
 
 function init() {
+  let isRunning = true;
   // setup
   const snakeContainer = document.getElementById(
     "snake-grid"
@@ -28,10 +29,9 @@ function init() {
   createBoard(ROWS, COLS, snakeContainer);
 
   // if button is activate, change innerText to "reset game"
-  if (startBtn) {
-    startBtn.textContent = "reset game";
-    startBtn.disabled = true;
-  }
+  startBtn.textContent = "pause game";
+
+  // startBtn.disabled = true;
 
   // listen to event
   document.addEventListener("keydown", (event) => {
@@ -62,10 +62,13 @@ function init() {
     //draw snake & draw apple
     drawSnake(snake);
     drawApple(apple);
-
-    setTimeout(() => {
-      window.requestAnimationFrame(gameLoop);
-    }, speed);
+    if (isRunning) {
+      setTimeout(() => {
+        window.requestAnimationFrame(gameLoop);
+      }, speed);
+    } else {
+      clearTimeout(window.requestAnimationFrame(gameLoop));
+    }
   }
   window.requestAnimationFrame(gameLoop);
 }

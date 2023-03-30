@@ -1,5 +1,6 @@
+import { COLS, ROWS } from "./gameConfig";
 import { Direction } from "./types";
-import { coordToId, idToCoord } from "./utils";
+import { coordToId, idToCoord, mod } from "./utils";
 
 export function updateSnake(
   snake: Array<string>,
@@ -19,8 +20,12 @@ export function updateSnake(
   // update new horizontalPosition of snakeHead
   const snakeHeadH = idToCoord(snakeHead)[1] + snakeDirection.h;
 
+  // wrap snake around if moves out of bounds
+  const newSnakeV = mod(snakeHeadV, ROWS);
+  const newSnakeH = mod(snakeHeadH, COLS);
+
   // convert the new snake into string with coordToId function
-  const newSnakeHead = coordToId([snakeHeadV, snakeHeadH]);
+  const newSnakeHead = coordToId([newSnakeV, newSnakeH]);
 
   // check if snakeHead is crossing the snake body
   if (snake.includes(newSnakeHead)) {
